@@ -36,7 +36,6 @@ function createFramerViewfile (src,dest) {
 	});
 }
 
-createFramerViewfile("tmp/design.json","tmp/view.coffee");
 module.exports =  {
     createFramerViewfile: createFramerViewfile
 };
