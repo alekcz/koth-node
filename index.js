@@ -1,8 +1,8 @@
 'use strict'
 const jsonfile = require('jsonfile');
 const core = require('./core/layer');
-const fs = require('fs-extra')
-
+const fs = require('fs-extra');
+const path = require('path');
 
 function readFile(path,cb) {
 	
@@ -20,7 +20,9 @@ function createFramerViewfile (src,dest) {
 	readFile(src,function (err, data) {
 		if(err) return false;
 		//var file = core.createLayer(data);
-		var contents = core.render(data);
+		var pagename = path.basename(src);
+		pagename = pagename.substring(0,(pagename.indexOf(".") || -1));
+		var contents = core.render(pagename,data);
 		fs.outputFile(dest, contents, (err) => {  
 		    // throws an error, you could also catch it here
 		    if (err)
@@ -34,6 +36,7 @@ function createFramerViewfile (src,dest) {
 	});
 }
 
+createFramerViewfile("tmp/design.json","tmp/view.coffee");
 module.exports =  {
     createFramerViewfile: createFramerViewfile
 };

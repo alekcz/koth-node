@@ -1,4 +1,5 @@
 'use strict'
+const randomstring = require("randomstring");
 
 function createLayer (args) {
 	return {
@@ -45,13 +46,21 @@ function renderSingle(object) {
 	return string + "" + renderChildren(object);
 }
 
-function render(object) {
+function packagePage(pagename,object) {
+	return {
+		"name": "window."+ (pagename || "maji"+randomstring.generate({length:7, charset: '[a-z]'})),
+		"type": "BackgroundLayer",
+		"children": [object]
+	}
+}
+
+function render(pagename,object) {
 	var finalstring = "";
-	finalstring = renderSingle(object);
+	var finalobject = packagePage(pagename,object);
+	finalstring = renderSingle(finalobject);
 	return finalstring;
 }
 
 module.exports =  {
-    createLayer: createLayer,
     render: render
 };
