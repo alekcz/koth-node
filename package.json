@@ -1,6 +1,6 @@
 {
   "name": "koth-node",
-  "version": "0.0.2",
+  "version": "0.2.0",
   "description": "A nodejs library for converting json objects to framer code",
   "main": "index.js",
   "scripts": {
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/alekcz/koth-node#readme",
   "dependencies": {
+    "flat": "^4.0.0",
     "fs-extra": "^5.0.0",
     "jsonfile": "^4.0.0",
     "randomstring": "^1.1.5"

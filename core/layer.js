@@ -1,5 +1,7 @@
 'use strict'
 const randomstring = require("randomstring");
+const flatten = require('flat')
+
 
 function createLayer (args) {
 	return {
@@ -47,18 +49,24 @@ function renderSingle(object) {
 }
 
 function packagePage(pagename,object) {
-	return {
-		"name": "window."+ (pagename || "maji"+randomstring.generate({length:7, charset: '[a-z]'})),
-		"type": "BackgroundLayer",
-		"children": [object]
+	var flat = flatten(object);
+	var wrapper = "\nwindow."+pagename+" = { \n";
+	for(var key in flat) {
+		if(flat.hasOwnProperty(key))
+		{
+			if(key.indexOf("name") != -1) {
+				wrapper = wrapper+ "\t"+flat[key]+": "+flat[key]+"\n"
+			}
+		}
 	}
+	wrapper = wrapper + "}\n"
+	return 	wrapper;
 }
 
 function render(pagename,object) {
 	var finalstring = "";
-	var finalobject = packagePage(pagename,object);
-	finalstring = renderSingle(finalobject);
-	return finalstring;
+	finalstring = renderSingle(object);
+	return finalstring + "\n" + packagePage(pagename,object);
 }
 
 module.exports =  {
