@@ -1,6 +1,5 @@
 'use strict'
 const randomstring = require("randomstring");
-const flatten = require('flat')
 
 
 function createLayer (args) {
@@ -35,38 +34,28 @@ function renderChildren(object) {
 
 function renderSingle(object) {
 	var string = "\n";
-	string = string + object.name + " = new " + object.type + "\n"
+	string = string +"\t" + object.name +":"+ object.name + " = new " + object.type + "\n"
 	for(var key in object) {
 	  // We check if this key exists in the obj
 	  if (object.hasOwnProperty(key) && ( key != "name" || key != "type" )) {
 	    // someKey is only the KEY (string)! Use it to get the obj:
 	    if(!ignoreKey(["name","type","children"], key)) {
-	   		string = string + "\t"+key + ": " + object[key+""] + "\n";
+	   		string = string + "\t\t"+key + ": " + object[key+""] + "\n";
 	    }
 	  }
 	}
 	return string + "" + renderChildren(object);
 }
 
-function packagePage(pagename,object) {
-	var flat = flatten(object);
-	var wrapper = "\nwindow."+pagename+" = { \n";
-	for(var key in flat) {
-		if(flat.hasOwnProperty(key))
-		{
-			if(key.indexOf("name") != -1) {
-				wrapper = wrapper+ "\t"+flat[key]+": "+flat[key]+"\n"
-			}
-		}
-	}
-	wrapper = wrapper + "}\n"
+function packagePage(pagename,data) {
+	var wrapper = "\nwindow."+pagename+" = { \n" + data + "}\n";
 	return 	wrapper;
 }
 
 function render(pagename,object) {
 	var finalstring = "";
 	finalstring = renderSingle(object);
-	return finalstring + "\n" + packagePage(pagename,object);
+	return finalstring + "\n" + packagePage(pagename,finalstring);
 }
 
 module.exports =  {

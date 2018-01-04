@@ -21,7 +21,8 @@ function createFramerViewfile (src,dest) {
 		if(err) return false;
 		//var file = core.createLayer(data);
 		var pagename = path.basename(src);
-		pagename = pagename.substring(0,(pagename.indexOf(".") || -1));
+		pagename = pagename.substring(0,(pagename.indexOf('.') || -1));
+		pagename = pagename.replace(/\s/g,'').replace(/^[^a-zA-Z_]+|[^a-zA-Z_0-9]+/g,'').replace(/^\d+\.\s*/, '');
 		var contents = core.render(pagename,data);
 		fs.outputFile(dest, contents, (err) => {  
 		    // throws an error, you could also catch it here
@@ -36,7 +37,7 @@ function createFramerViewfile (src,dest) {
 	});
 }
 
-
+createFramerViewfile('tmp/9arich-com Pew.json','tmp/view.coffee');
 module.exports =  {
     createFramerViewfile: createFramerViewfile
 };
