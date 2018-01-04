@@ -15,6 +15,9 @@ function readFile(path,cb) {
 
 }
 
+function sanitizeName(pagename) {
+	return pagename.replace(/\s/g,'').replace(/^[^a-zA-Z_]+|[^a-zA-Z_0-9]+/g,'').replace(/^\d+\.\s*/, '');
+}
 
 function createFramerViewfile (src,dest) {
 	readFile(src,function (err, data) {
@@ -22,7 +25,7 @@ function createFramerViewfile (src,dest) {
 		//var file = core.createLayer(data);
 		var pagename = path.basename(src);
 		pagename = pagename.substring(0,(pagename.indexOf('.') || -1));
-		pagename = pagename.replace(/\s/g,'').replace(/^[^a-zA-Z_]+|[^a-zA-Z_0-9]+/g,'').replace(/^\d+\.\s*/, '');
+		pagename = sanitizeName(pagename);
 		var contents = core.render(pagename,data);
 		fs.outputFile(dest, contents, (err) => {  
 		    // throws an error, you could also catch it here
@@ -38,5 +41,6 @@ function createFramerViewfile (src,dest) {
 }
 
 module.exports =  {
-    createFramerViewfile: createFramerViewfile
+    createFramerViewfile: createFramerViewfile,
+    sanitizeName: sanitizeName
 };

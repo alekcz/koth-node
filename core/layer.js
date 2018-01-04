@@ -55,7 +55,7 @@ function packagePage(pagename,data) {
 function render(pagename,object) {
 	var finalstring = "";
 	finalstring = renderSingle(object);
-	return finalstring + "\n" + packagePage(pagename,finalstring);
+	return packagePage(pagename,finalstring);
 }
 
 module.exports =  {
