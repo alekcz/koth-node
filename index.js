@@ -37,7 +37,6 @@ function createFramerViewfile (src,dest) {
 	});
 }
 
-createFramerViewfile('tmp/9arich-com Pew.json','tmp/view.coffee');
 module.exports =  {
     createFramerViewfile: createFramerViewfile
 };
