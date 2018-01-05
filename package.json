@@ -1,6 +1,6 @@
 {
   "name": "maji-import",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "A nodejs library for converting json objects to framer code",
   "main": "index.js",
   "scripts": {
