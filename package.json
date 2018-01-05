@@ -1,5 +1,5 @@
 {
-  "name": "koth-node",
+  "name": "maji-import",
   "version": "0.2.2",
   "description": "A nodejs library for converting json objects to framer code",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alekcz/koth-node.git"
+    "url": "git+https://github.com/alekcz/maji-import.git"
   },
   "keywords": [
     "maji",
@@ -21,9 +21,9 @@
   "author": "alekcz@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/alekcz/koth-node/issues"
+    "url": "https://github.com/alekcz/maji-import/issues"
   },
-  "homepage": "https://github.com/alekcz/koth-node#readme",
+  "homepage": "https://github.com/alekcz/maji-import#readme",
   "dependencies": {
     "adm-zip": "^0.4.7",
     "fs-extra": "^5.0.0",
