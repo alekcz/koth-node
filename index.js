@@ -50,5 +50,6 @@ loadGravitFile("tmp/gravitfiletest.gvdesign",function(data) {
 module.exports =  {
     createFramerViewfile: createFramerViewfile,
     sanitizeName: core.sanitizeName,
-    loadGravitFile: loadGravitFile
+    loadGravitFile: loadGravitFile,
+    render: core.render
 };
