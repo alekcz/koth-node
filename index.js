@@ -15,17 +15,13 @@ function readFile(path,cb) {
 
 }
 
-function sanitizeName(pagename) {
-	return pagename.replace(/\s/g,'').replace(/^[^a-zA-Z_]+|[^a-zA-Z_0-9]+/g,'').replace(/^\d+\.\s*/, '');
-}
-
 function createFramerViewfile (src,dest) {
 	readFile(src,function (err, data) {
 		if(err) return false;
 		//var file = core.createLayer(data);
 		var pagename = path.basename(src);
 		pagename = pagename.substring(0,(pagename.indexOf('.') || -1));
-		pagename = sanitizeName(pagename);
+		pagename = core.sanitizeName(pagename);
 		var contents = core.render(pagename,data);
 		fs.outputFile(dest, contents, (err) => {  
 		    // throws an error, you could also catch it here
@@ -40,7 +36,20 @@ function createFramerViewfile (src,dest) {
 	});
 }
 
+function loadSketchFile(src,dest) {
+	var sketchfile = core.getSketchFile(src, dest);
+	fs.outputFile(dest+"/"+sketchfile.filename+".coffee", sketchfile.data, (err) => {  
+	    if (err) {
+	    	console.log(err)
+	    }
+	});
+}
+
+loadSketchFile("tmp/fileformattest.sketch","tmp/views");
+
 module.exports =  {
     createFramerViewfile: createFramerViewfile,
-    sanitizeName: sanitizeName
+    loadSketchFile: loadSketchFile,
+    sanitizeName: core.sanitizeName,
+
 };
