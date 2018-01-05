@@ -37,13 +37,15 @@ function createFramerViewfile (src,dest) {
 	});
 }
 
-function loadGravitFile(src,dest) {
-	gravit.importFile(src,dest);
+function loadGravitFile(src, cb) {
+	gravit.importFile(src, function(object) {
+		cb(object);
+	});
 }
 
-loadGravitFile("tmp/gravitfiletest.gvdesign","tmp/views");
 
 module.exports =  {
     createFramerViewfile: createFramerViewfile,
-    sanitizeName: core.sanitizeName
+    sanitizeName: core.sanitizeName,
+    loadGravitFile: loadGravitFile
 };
