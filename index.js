@@ -43,6 +43,9 @@ function loadGravitFile(src, cb) {
 	});
 }
 
+loadGravitFile("tmp/gravitfiletest.gvdesign",function(data) {
+	console.log(data)
+})
 
 module.exports =  {
     createFramerViewfile: createFramerViewfile,
