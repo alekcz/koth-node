@@ -1,6 +1,7 @@
 'use strict'
 const jsonfile = require('jsonfile');
-const core = require('./core/layer');
+const core = require('./lib/core');
+const gravit = require('./lib/gravit');
 const fs = require('fs-extra');
 const path = require('path');
 
@@ -36,20 +37,13 @@ function createFramerViewfile (src,dest) {
 	});
 }
 
-function loadSketchFile(src,dest) {
-	var sketchfile = core.getSketchFile(src, dest);
-	fs.outputFile(dest+"/"+sketchfile.filename+".coffee", sketchfile.data, (err) => {  
-	    if (err) {
-	    	console.log(err)
-	    }
-	});
+function loadGravitFile(src,dest) {
+	gravit.importFile(src,dest);
 }
 
-loadSketchFile("tmp/fileformattest.sketch","tmp/views");
+loadGravitFile("tmp/gravitfiletest.gvdesign","tmp/views");
 
 module.exports =  {
     createFramerViewfile: createFramerViewfile,
-    loadSketchFile: loadSketchFile,
-    sanitizeName: core.sanitizeName,
-
+    sanitizeName: core.sanitizeName
 };
