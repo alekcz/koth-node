@@ -43,10 +43,9 @@ function loadGravitFile(src, cb) {
 	});
 }
 
-loadGravitFile("tmp/gravitfiletest.gvdesign",function(data) {
+/*loadGravitFile("tmp/twitterdesign.gvdesign",function(data) {
 	
-})
-
+})*/
 module.exports =  {
     createFramerViewfile: createFramerViewfile,
     sanitizeName: core.sanitizeName,
